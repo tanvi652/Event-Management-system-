@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register for Event</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #00C6FF, #007BFF);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(12px);
+            padding: 40px;
+            border-radius: 12px;
+            width: 400px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 14px;
+            color: #e2e2e2;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 6px;
+            outline: none;
+            font-size: 15px;
+        }
+        input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+        a {
+            color: #fff;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 15px;
+        }
+        .success {
+            background: rgba(0, 128, 0, 0.8);
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+        .error {
+            background: rgba(255, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if success %}
+            <div class="success">✅ Registration completed successfully!</div>
+        {% elif error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <h2>Register for {{ event[1] }}</h2>
+        <p>Date: {{ event[2] }}</p>
+        <form method="POST">
+            <input type="text" name="name" placeholder="Your Full Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <input type="submit" value="Register">
+        </form>
+        <a href="/home">⬅ Back to Home</a>
+    </div>
+</body>
+</html>

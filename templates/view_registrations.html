@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Registrations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #007BFF, #00C6FF);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+            min-height: 100vh;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            color: white;
+        }
+        th {
+            background: rgba(255,255,255,0.2);
+        }
+        tr:nth-child(even) {
+            background: rgba(255,255,255,0.1);
+        }
+        a {
+            margin-top: 20px;
+            color: #fff;
+            text-decoration: underline;
+        }
+        a:hover {
+            color: #FFD700;
+        }
+    </style>
+</head>
+<body>
+    <h2>Registrations for {{ event[0] }}</h2>
+    {% if registrations %}
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+        {% for r in registrations %}
+        <tr>
+            <td>{{ r[0] }}</td>
+            <td>{{ r[1] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p>No registrations found for this event.</p>
+    {% endif %}
+    <a href="/home">← Back to Dashboard</a>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Dashboard</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #007BFF, #00C6FF);
+            min-height: 100vh;
+            color: #333;
+        }
+        header {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            color: #fff;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        header h1 {
+            font-size: 22px;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+        .logout {
+            background: #fff;
+            color: #007BFF;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .logout:hover {
+            background: #007BFF;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 30px;
+            color: white;
+        }
+        .welcome {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .welcome h2 {
+            font-size: 26px;
+        }
+
+        .add-btn {
+            display: inline-block;
+            background: #28a745;
+            padding: 10px 20px;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .add-btn:hover {
+            background: #218838;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 14px;
+            text-align: left;
+            color: #fff;
+        }
+        th {
+            background: rgba(255,255,255,0.2);
+        }
+        tr:nth-child(even) {
+            background: rgba(255,255,255,0.1);
+        }
+        a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .actions a {
+            margin-right: 10px;
+            color: #ffd700;
+        }
+        .actions a:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Event Management System</h1>
+        <a href="/logout" class="logout">Logout</a>
+    </header>
+
+    <div class="container">
+        <div class="welcome">
+            <h2>Welcome, {{ session['username'] }} 👋</h2>
+            <p>You are logged in as <strong>{{ session['role'].capitalize() }}</strong></p>
+        </div>
+
+        {% if session['role'] == 'admin' %}
+        <div style="text-align: right; margin-bottom: 20px;">
+            <a href="/add" class="add-btn">➕ Add New Event</a>
+        </div>
+        {% endif %}
+
+        {% if events %}
+        <table>
+            <tr>
+                <th>Event Name</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+            {% for event in events %}
+            <tr>
+                <td>{{ event[1] }}</td>
+                <td>{{ event[2] }}</td>
+                <td>{{ event[3] }}</td>
+                <td class="actions">
+                    {% if session['role'] == 'admin' %}
+                       <a href="/edit/{{ event[0] }}">Edit</a> |
+                       <a href="/delete/{{ event[0] }}" onclick="return confirm('Are you sure you want to delete this event?')">Delete</a> |
+                       <a href="/view_registrations/{{ event[0] }}">👁 View Registrations</a>
+                    {% elif session['role'] == 'user' %}
+                        <a href="/register_event/{{ event[0] }}">Register</a>
+                    {% endif %}
+                </td>
+
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p style="text-align:center; color:#eee;">No events found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

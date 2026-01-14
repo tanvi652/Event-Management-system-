@@ -1,0 +1,71 @@
+<!-- TEST ADD EVENT UPDATED -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Event</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #007BFF, #6f42c1);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            width: 350px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            color: white;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+        }
+        input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+        a {
+            display: block;
+            text-align: center;
+            color: #fff;
+            margin-top: 15px;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <form class="card" method="POST" enctype="multipart/form-data">
+        <h2>Add Event</h2>
+        <input type="text" name="name" placeholder="Event Name" required>
+        <input type="date" name="date" required>
+        <textarea name="description" placeholder="Event Description" rows="3" required></textarea>
+        <input type="file" name="image">
+        <input type="submit" value="Add Event">
+        <a href="/home">← Back to Home</a>
+    </form>
+</body>
+</html>

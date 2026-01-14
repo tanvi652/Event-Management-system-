@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Event Management System</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #00C6FF, #007BFF);
+            background-attachment: fixed;
+        }
+        .register-container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            width: 360px;
+            text-align: center;
+            color: white;
+            animation: fadeIn 1s ease;
+        }
+        h2 {
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 6px;
+            outline: none;
+            font-size: 15px;
+        }
+        input[type="text"], input[type="password"], input[type="email"] {
+            background: rgba(255, 255, 255, 0.85);
+            color: #333;
+        }
+        select {
+            background: rgba(255, 255, 255, 0.85);
+            color: #333;
+        }
+        input[type="submit"] {
+            background-color: #0056b3;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #004092;
+            transform: scale(1.03);
+        }
+        .links {
+            margin-top: 15px;
+        }
+        a {
+            color: #fff;
+            text-decoration: underline;
+            transition: opacity 0.3s;
+        }
+        a:hover {
+            opacity: 0.8;
+        }
+        .error {
+            color: #ffb3b3;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h2>Create Account ✨</h2>
+        <form method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <select name="role" required>
+                <option value="" disabled selected>Select Role</option>
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+            </select>
+            <input type="submit" value="Register">
+        </form>
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+        <div class="links">
+            <p>Already have an account? <a href="/login">Login here</a></p>
+        </div>
+    </div>
+</body>
+</html>
